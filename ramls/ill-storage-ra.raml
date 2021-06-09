@@ -1,0 +1,64 @@
+#%RAML 1.0
+title: ILL Storage
+version: v0.1
+protocols: [ HTTP, HTTPS ]
+baseUri: http://localhost:9130
+
+documentation:
+  - title: Interlibrary Loan Storage API
+    content: <b>Storage for interlibrary loans</b>
+
+types:
+  request:    !include request.json
+  requests:   !include requests.json
+  errors:     !include raml-util/schemas/errors.schema
+  parameters: !include raml-util/schemas/parameters.schema
+
+traits:
+  language: !include raml-util/traits/language.raml
+  pageable: !include raml-util/traits/pageable.raml
+  searchable: !include raml-util/traits/searchable.raml
+  validate: !include raml-util/traits/validation.raml
+
+resourceTypes:
+  collection: !include raml-util/rtypes/collection.raml
+  collection-item: !include raml-util/rtypes/item-collection.raml
+  get-only: !include raml-util/rtypes/get-only.raml
+
+/ill-storage/ra:
+  /requests:
+    displayName: Requests
+    type:
+      collection:
+        exampleCollection: !include examples/requests.json
+        exampleItem: !include examples/request.json
+        schemaCollection: requests
+        schemaItem: request
+    get:
+      is: [pageable,
+        searchable: {description: "searchable using CQL",
+                        example: "requesterId=\"cf23adf0-61ba-4887-bf82-956c4aae2260\""},
+        ]
+      responses:
+        501:
+          description: "Not implemented yet"
+    post:
+      is: [validate]
+    /{requestId}:
+      type:
+        collection-item:
+          exampleItem: !include examples/request.json
+          schema: request
+      get:
+        responses:
+          501:
+            description: "Not implemented yet"
+      put:
+        is: [validate]
+        responses:
+          501:
+            description: "Not implemented yet"
+      delete:
+        responses:
+          501:
+            description: "Not implemented yet"

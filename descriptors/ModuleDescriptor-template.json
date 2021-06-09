@@ -1,0 +1,93 @@
+{
+  "id": "${artifactId}-${version}",
+  "name": "Interlibrary Request Storage",
+  "requires": [
+    {
+      "id": "users",
+      "version": "15.0"
+    }
+  ],
+  "provides": [
+    {
+      "id": "request-storage-ra",
+      "version": "0.1",
+      "handlers": [
+        {
+          "methods": ["GET"],
+          "pathPattern": "/ill-storage/ra/requests",
+          "permissionsRequired": ["ill-storage.requests.collection.get"]
+        },
+        {
+          "methods": ["GET"],
+          "pathPattern": "/ill-storage/ra/requests/{id}",
+          "permissionsRequired": ["ill-storage.requests.item.get"]
+        },
+        {
+          "methods": ["POST"],
+          "pathPattern": "/ill-storage/ra/requests",
+          "permissionsRequired": ["ill-storage.requests.item.post"]
+        },
+        {
+          "methods": ["PUT"],
+          "pathPattern": "/ill-storage/ra/requests/{id}",
+          "permissionsRequired": ["ill-storage.requests.item.put"]
+        },
+        {
+          "methods": ["DELETE"],
+          "pathPattern": "/ill-storage/ra/requests/{id}",
+          "permissionsRequired": ["ill-storage.requests.item.delete"]
+        }
+      ]
+    }
+  ],
+  "permissionSets": [
+    {
+      "permissionName": "ill-storage.requests.collection.get",
+      "displayName": "Interlibrary loan requests - get request collection",
+      "description": "Get request collection"
+    },
+    {
+      "permissionName": "ill-storage.requests.item.get",
+      "displayName": "Interlibrary loan requests - get request",
+      "description": "Get request"
+    },
+    {
+      "permissionName": "ill-storage.requests.item.post",
+      "displayName": "Interlibrary loan requests - create request",
+      "description": "Create request"
+    },
+    {
+      "permissionName": "ill-storage.requests.item.put",
+      "displayName": "Interlibrary loan requests - update request",
+      "description": "Update request"
+    },
+    {
+      "permissionName": "ill-storage.requests.item.delete",
+      "displayName": "Interlibrary loan requests - delete request",
+      "description": "Delete request"
+    }
+  ],
+  "launchDescriptor": {
+    "dockerImage": "${artifactId}:${version}",
+    "dockerPull": false,
+    "dockerArgs": {
+      "HostConfig": {
+        "Memory": 357913941,
+        "PortBindings": { "8081/tcp": [ { "HostPort": "%p" } ] }
+      }
+    },
+    "env": [
+      { "name": "JAVA_OPTIONS",
+        "value": "-XX:MaxRAMPercentage=66.0"
+      },
+      { "name": "DB_HOST", "value": "postgres" },
+      { "name": "DB_PORT", "value": "5432" },
+      { "name": "DB_USERNAME", "value": "folio_admin" },
+      { "name": "DB_PASSWORD", "value": "folio_admin" },
+      { "name": "DB_DATABASE", "value": "okapi_modules" },
+      { "name": "DB_QUERYTIMEOUT", "value": "60000" },
+      { "name": "DB_CHARSET", "value": "UTF-8" },
+      { "name": "DB_MAXPOOLSIZE", "value": "5" }
+    ]
+  }
+}
