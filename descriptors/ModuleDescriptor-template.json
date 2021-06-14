@@ -9,6 +9,25 @@
   ],
   "provides": [
     {
+      "id": "_tenant",
+      "version": "2.0",
+      "interfaceType": "system",
+      "handlers": [
+        {
+          "methods": ["GET"],
+          "pathPattern": "/_/tenant",
+          "modulePermissions": [
+            "pubsub.event-types.post",
+            "pubsub.publishers.post",
+            "pubsub.subscribers.post"
+          ]
+        }, {
+          "methods": ["GET", "DELETE"],
+          "pathPattern": "/_/tenant/{id}"
+        }
+      ]
+    },
+    {
       "id": "request-storage-ra",
       "version": "0.1",
       "handlers": [
