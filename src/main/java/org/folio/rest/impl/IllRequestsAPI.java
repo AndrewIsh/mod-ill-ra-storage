@@ -9,7 +9,6 @@ import org.folio.rest.annotations.Validate;
 import org.folio.rest.jaxrs.model.Request;
 import org.folio.rest.jaxrs.model.Requests;
 import org.folio.rest.jaxrs.resource.IllStorageRa;
-import org.folio.rest.persist.MyPgUtil;
 import org.folio.rest.persist.PgUtil;
 
 import javax.validation.constraints.Max;
@@ -95,7 +94,7 @@ public class IllRequestsAPI implements IllStorageRa {
     Handler<AsyncResult<Response>> asyncResultHandler,
     Context vertxContext
   ) {
-    MyPgUtil.putUpsert204(
+    PgUtil.put(
       "ill_request",
       request,
       id,
