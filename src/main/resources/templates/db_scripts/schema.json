@@ -53,30 +53,6 @@
           "removeAccents": false
         }
       ]
-    },
-    {
-      "tableName": "ill_request_status",
-      "fromModuleVersion": "0.1",
-      "withMetadata": true,
-      "withAuditing": true,
-      "auditingTableName": "audit_ill_request_status",
-      "auditingFieldName": "ill_request_status",
-      "uniqueIndex": [
-        {
-          "fieldName": "statusId",
-          "tOps": "ADD",
-          "caseSensitive": true,
-          "removeAccents": false
-        }
-      ],
-      "index": [
-        {
-          "fieldName": "name",
-          "tOps": "ADD",
-          "caseSensitive": true,
-          "removeAccents": true
-        }
-      ]
     }
   ]
 }
