@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.folio.rest.annotations.Validate;
 import org.folio.rest.jaxrs.model.Request;
 import org.folio.rest.jaxrs.model.Requests;
-import org.folio.rest.jaxrs.resource.IllStorageRa;
+import org.folio.rest.jaxrs.resource.IllRaStorage;
 import org.folio.rest.persist.PgUtil;
 
 import javax.validation.constraints.Max;
@@ -17,12 +17,12 @@ import javax.validation.constraints.Pattern;
 import javax.ws.rs.core.Response;
 import java.util.Map;
 
-public class IllRequestsAPI implements IllStorageRa {
+public class IllRequestsAPI implements IllRaStorage {
   private static final Logger log = LogManager.getLogger();
 
   @Validate
   @Override
-  public void getIllStorageRaRequests(
+  public void getIllRaStorageRequests(
     @Min(0L) @Max(2147483647L) int offset,
     @Min(0L) @Max(2147483647L) int limit,
     String query,
@@ -40,14 +40,14 @@ public class IllRequestsAPI implements IllStorageRa {
       limit,
       okapiHeaders,
       vertxContext,
-      GetIllStorageRaRequestsResponse.class,
+      GetIllRaStorageRequestsResponse.class,
       asyncResultHandler
     );
   }
 
   @Validate
   @Override
-  public void postIllStorageRaRequests(
+  public void postIllRaStorageRequests(
     @Pattern(regexp = "[a-zA-Z]{2}") String lang,
     Request request,
     Map<String, String> okapiHeaders,
@@ -59,14 +59,14 @@ public class IllRequestsAPI implements IllStorageRa {
       request,
       okapiHeaders,
       vertxContext,
-      PostIllStorageRaRequestsResponse.class,
+      PostIllRaStorageRequestsResponse.class,
       asyncResultHandler
     );
   }
 
   @Validate
   @Override
-  public void getIllStorageRaRequestsByRequestId(
+  public void getIllRaStorageRequestsByRequestId(
     String id,
     @Pattern(regexp = "[a-zA-Z]{2}") String lang,
     Map<String, String> okapiHeaders,
@@ -79,14 +79,14 @@ public class IllRequestsAPI implements IllStorageRa {
       id,
       okapiHeaders,
       vertxContext,
-      GetIllStorageRaRequestsByRequestIdResponse.class,
+      GetIllRaStorageRequestsByRequestIdResponse.class,
       asyncResultHandler
     );
   }
 
   @Validate
   @Override
-  public void putIllStorageRaRequestsByRequestId(
+  public void putIllRaStorageRequestsByRequestId(
     String id,
     @Pattern(regexp = "[a-zA-Z]{2}") String lang,
     Request request,
@@ -100,14 +100,14 @@ public class IllRequestsAPI implements IllStorageRa {
       id,
       okapiHeaders,
       vertxContext,
-      PutIllStorageRaRequestsByRequestIdResponse.class,
+      PutIllRaStorageRequestsByRequestIdResponse.class,
       asyncResultHandler
     );
   }
 
   @Validate
   @Override
-  public void deleteIllStorageRaRequestsByRequestId(
+  public void deleteIllRaStorageRequestsByRequestId(
     String id,
     @Pattern(regexp = "[a-zA-Z]{2}") String lang,
     Map<String, String> okapiHeaders,
@@ -119,7 +119,7 @@ public class IllRequestsAPI implements IllStorageRa {
       id,
       okapiHeaders,
       vertxContext,
-      DeleteIllStorageRaRequestsByRequestIdResponse.class,
+      DeleteIllRaStorageRequestsByRequestIdResponse.class,
       asyncResultHandler
     );
   }

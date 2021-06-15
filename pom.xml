@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.folio</groupId>
-  <artifactId>mod-ill-storage</artifactId>
+  <artifactId>mod-ill-ra-storage</artifactId>
   <version>0.0.1</version>
   <packaging>jar</packaging>
 
@@ -30,9 +30,9 @@
   </repositories>
 
   <scm>
-    <url>https://github.com/PTFS-Europe/mod-ill-storage</url>
-    <connection>scm:git:git://github.com/PTFS-Europe/mod-ill-storage</connection>
-    <developerConnection>scm:git:git@github.com:PTFS-Europe/mod-ill-storage.git</developerConnection>
+    <url>https://github.com/PTFS-Europe/mod-ill-ra-storage</url>
+    <connection>scm:git:git://github.com/PTFS-Europe/mod-ill-ra-storage</connection>
+    <developerConnection>scm:git:git@github.com:PTFS-Europe/mod-ill-ra-storage.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
 

@@ -14,7 +14,7 @@
       "interfaceType": "system",
       "handlers": [
         {
-          "methods": ["GET"],
+          "methods": ["POST"],
           "pathPattern": "/_/tenant",
           "modulePermissions": [
             "pubsub.event-types.post",
@@ -28,60 +28,60 @@
       ]
     },
     {
-      "id": "request-storage-ra",
+      "id": "ill-ra-storage",
       "version": "0.1",
       "handlers": [
         {
           "methods": ["GET"],
-          "pathPattern": "/ill-storage/ra/requests",
-          "permissionsRequired": ["ill-storage.requests.collection.get"]
+          "pathPattern": "/ill-ra-storage/requests",
+          "permissionsRequired": ["ill-ra-storage.requests.collection.get"]
         },
         {
           "methods": ["GET"],
-          "pathPattern": "/ill-storage/ra/requests/{id}",
-          "permissionsRequired": ["ill-storage.requests.item.get"]
+          "pathPattern": "/ill-ra-storage/requests/{id}",
+          "permissionsRequired": ["ill-ra-storage.requests.item.get"]
         },
         {
           "methods": ["POST"],
-          "pathPattern": "/ill-storage/ra/requests",
-          "permissionsRequired": ["ill-storage.requests.item.post"]
+          "pathPattern": "/ill-ra-storage/requests",
+          "permissionsRequired": ["ill-ra-storage.requests.item.post"]
         },
         {
           "methods": ["PUT"],
-          "pathPattern": "/ill-storage/ra/requests/{id}",
-          "permissionsRequired": ["ill-storage.requests.item.put"]
+          "pathPattern": "/ill-ra-storage/requests/{id}",
+          "permissionsRequired": ["ill-ra-storage.requests.item.put"]
         },
         {
           "methods": ["DELETE"],
-          "pathPattern": "/ill-storage/ra/requests/{id}",
-          "permissionsRequired": ["ill-storage.requests.item.delete"]
+          "pathPattern": "/ill-ra-storage/requests/{id}",
+          "permissionsRequired": ["ill-ra-storage.requests.item.delete"]
         }
       ]
     }
   ],
   "permissionSets": [
     {
-      "permissionName": "ill-storage.requests.collection.get",
+      "permissionName": "ill-ra-storage.requests.collection.get",
       "displayName": "Interlibrary loan requests - get request collection",
       "description": "Get request collection"
     },
     {
-      "permissionName": "ill-storage.requests.item.get",
+      "permissionName": "ill-ra-storage.requests.item.get",
       "displayName": "Interlibrary loan requests - get request",
       "description": "Get request"
     },
     {
-      "permissionName": "ill-storage.requests.item.post",
+      "permissionName": "ill-ra-storage.requests.item.post",
       "displayName": "Interlibrary loan requests - create request",
       "description": "Create request"
     },
     {
-      "permissionName": "ill-storage.requests.item.put",
+      "permissionName": "ill-ra-storage.requests.item.put",
       "displayName": "Interlibrary loan requests - update request",
       "description": "Update request"
     },
     {
-      "permissionName": "ill-storage.requests.item.delete",
+      "permissionName": "ill-ra-storage.requests.item.delete",
       "displayName": "Interlibrary loan requests - delete request",
       "description": "Delete request"
     }
