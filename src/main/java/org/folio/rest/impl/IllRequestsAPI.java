@@ -3,8 +3,6 @@ package org.folio.rest.impl;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Context;
 import io.vertx.core.Handler;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.folio.rest.annotations.Validate;
 import org.folio.rest.jaxrs.model.Request;
 import org.folio.rest.jaxrs.model.Requests;
@@ -18,7 +16,7 @@ import javax.ws.rs.core.Response;
 import java.util.Map;
 
 public class IllRequestsAPI implements IllRaStorage {
-  private static final Logger log = LogManager.getLogger();
+  private static final String ILL_REQUEST_TABLE = "ill_request";
 
   @Validate
   @Override
@@ -32,7 +30,7 @@ public class IllRequestsAPI implements IllRaStorage {
     Context vertxContext
   ) {
     PgUtil.get(
-      "ill_request",
+      ILL_REQUEST_TABLE,
       Request.class,
       Requests.class,
       query,
@@ -55,7 +53,7 @@ public class IllRequestsAPI implements IllRaStorage {
     Context vertxContext
   ) {
     PgUtil.post(
-      "ill_request",
+      ILL_REQUEST_TABLE,
       request,
       okapiHeaders,
       vertxContext,
@@ -74,7 +72,7 @@ public class IllRequestsAPI implements IllRaStorage {
     Context vertxContext
   ) {
     PgUtil.getById(
-      "ill_request",
+      ILL_REQUEST_TABLE,
       Request.class,
       id,
       okapiHeaders,
@@ -95,7 +93,7 @@ public class IllRequestsAPI implements IllRaStorage {
     Context vertxContext
   ) {
     PgUtil.put(
-      "ill_request",
+      ILL_REQUEST_TABLE,
       request,
       id,
       okapiHeaders,
@@ -115,7 +113,7 @@ public class IllRequestsAPI implements IllRaStorage {
     Context vertxContext
   ) {
     PgUtil.deleteById(
-      "ill_request",
+      ILL_REQUEST_TABLE,
       id,
       okapiHeaders,
       vertxContext,
