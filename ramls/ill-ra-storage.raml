@@ -9,8 +9,8 @@ documentation:
     content: <b>Storage API for an interlibrary loans requesting agency</b>
 
 types:
-  request:    !include request.json
-  requests:   !include requests.json
+  request:    !include mod-ill-ramls/schemas/request.json
+  requests:   !include mod-ill-ramls/schemas/requests.json
   errors:     !include raml-util/schemas/errors.schema
   parameters: !include raml-util/schemas/parameters.schema
 
@@ -30,8 +30,8 @@ resourceTypes:
     displayName: Requests
     type:
       collection:
-        exampleCollection: !include examples/requests.json
-        exampleItem: !include examples/request.json
+        exampleCollection: !include mod-ill-ramls/examples/requests.json
+        exampleItem: !include mod-ill-ramls/examples/request.json
         schemaCollection: requests
         schemaItem: request
     get:
@@ -47,7 +47,7 @@ resourceTypes:
     /{requestId}:
       type:
         collection-item:
-          exampleItem: !include examples/request.json
+          exampleItem: !include mod-ill-ramls/examples/request.json
           schema: request
       get:
         responses:
