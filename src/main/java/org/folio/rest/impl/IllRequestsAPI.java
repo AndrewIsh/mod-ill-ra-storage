@@ -6,6 +6,8 @@ import io.vertx.core.Handler;
 import org.folio.rest.annotations.Validate;
 import org.folio.rest.jaxrs.model.Request;
 import org.folio.rest.jaxrs.model.Requests;
+import org.folio.rest.jaxrs.model.Status;
+import org.folio.rest.jaxrs.model.Statuses;
 import org.folio.rest.jaxrs.resource.IllRaStorage;
 import org.folio.rest.persist.PgUtil;
 
@@ -17,6 +19,7 @@ import java.util.Map;
 
 public class IllRequestsAPI implements IllRaStorage {
   private static final String ILL_REQUEST_TABLE = "ill_request";
+  private static final String ILL_STATUS_TABLE = "ill_status";
 
   @Validate
   @Override
@@ -118,6 +121,81 @@ public class IllRequestsAPI implements IllRaStorage {
       okapiHeaders,
       vertxContext,
       DeleteIllRaStorageRequestsByRequestIdResponse.class,
+      asyncResultHandler
+    );
+  }
+
+  @Validate
+  @Override
+  public void getIllRaStorageStatuses(int offset, int limit, String query, String lang, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
+    PgUtil.get(
+      ILL_STATUS_TABLE,
+      Status.class,
+      Statuses.class,
+      query,
+      offset,
+      limit,
+      okapiHeaders,
+      vertxContext,
+      GetIllRaStorageStatusesResponse.class,
+      asyncResultHandler
+    );
+  }
+
+  @Validate
+  @Override
+  public void postIllRaStorageStatuses(String lang, Status status, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
+    PgUtil.post(
+      ILL_STATUS_TABLE,
+      status,
+      okapiHeaders,
+      vertxContext,
+      PostIllRaStorageStatusesResponse.class,
+      asyncResultHandler
+    );
+  }
+
+  @Validate
+  @Override
+  public void getIllRaStorageStatusesByStatusId(String id, String lang, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
+    // TODO: Fix error detailed here:
+    // https://folio-project.slack.com/archives/CC0PHKEMT/p1625581263193100
+    PgUtil.getById(
+      ILL_STATUS_TABLE,
+      Status.class,
+      id,
+      okapiHeaders,
+      vertxContext,
+      GetIllRaStorageStatusesByStatusIdResponse.class,
+      asyncResultHandler
+    );
+  }
+
+  @Validate
+  @Override
+  public void putIllRaStorageStatusesByStatusId(String id, String lang, Status status, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
+    // TODO: Fix error detailed here:
+    // https://folio-project.slack.com/archives/CC0PHKEMT/p1625581263193100
+    PgUtil.put(
+      ILL_STATUS_TABLE,
+      status,
+      id,
+      okapiHeaders,
+      vertxContext,
+      PutIllRaStorageStatusesByStatusIdResponse.class,
+      asyncResultHandler
+    );
+  }
+
+  @Validate
+  @Override
+  public void deleteIllRaStorageStatusesByStatusId(String id, String lang, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
+    PgUtil.deleteById(
+      ILL_STATUS_TABLE,
+      id,
+      okapiHeaders,
+      vertxContext,
+      DeleteIllRaStorageStatusesByStatusIdResponse.class,
       asyncResultHandler
     );
   }

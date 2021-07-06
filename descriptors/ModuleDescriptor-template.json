@@ -55,6 +55,31 @@
           "methods": ["DELETE"],
           "pathPattern": "/ill-ra-storage/requests/{id}",
           "permissionsRequired": ["ill-ra-storage.requests.item.delete"]
+        },
+        {
+          "methods": ["GET"],
+          "pathPattern": "/ill-ra-storage/statuses",
+          "permissionsRequired": ["ill-ra-storage.statuses.collection.get"]
+        },
+        {
+          "methods": ["GET"],
+          "pathPattern": "/ill-ra-storage/statuses/{id}",
+          "permissionsRequired": ["ill-ra-storage.statuses.item.get"]
+        },
+        {
+          "methods": ["POST"],
+          "pathPattern": "/ill-ra-storage/statuses",
+          "permissionsRequired": ["ill-ra-storage.statuses.item.post"]
+        },
+        {
+          "methods": ["PUT"],
+          "pathPattern": "/ill-ra-storage/statuses/{id}",
+          "permissionsRequired": ["ill-ra-storage.statuses.item.put"]
+        },
+        {
+          "methods": ["DELETE"],
+          "pathPattern": "/ill-ra-storage/statuses/{id}",
+          "permissionsRequired": ["ill-ra-storage.statuses.item.delete"]
         }
       ]
     }
@@ -84,6 +109,31 @@
       "permissionName": "ill-ra-storage.requests.item.delete",
       "displayName": "Interlibrary loan requests - delete request",
       "description": "Delete request"
+    },
+    {
+      "permissionName": "ill-ra-storage.statuses.collection.get",
+      "displayName": "Interlibrary loan request statuses- get status collection",
+      "description": "Get status collection"
+    },
+    {
+      "permissionName": "ill-ra-storage.statuses.item.get",
+      "displayName": "Interlibrary loan request status - get status",
+      "description": "Get status"
+    },
+    {
+      "permissionName": "ill-ra-storage.statuses.item.post",
+      "displayName": "Interlibrary loan request statuses - create status",
+      "description": "Create status"
+    },
+    {
+      "permissionName": "ill-ra-storage.statuses.item.put",
+      "displayName": "Interlibrary loan request statuses - update status",
+      "description": "Update status"
+    },
+    {
+      "permissionName": "ill-ra-storage.statuses.item.delete",
+      "displayName": "Interlibrary loan request statuses - delete status",
+      "description": "Delete status"
     }
   ],
   "launchDescriptor": {
