@@ -11,8 +11,8 @@ documentation:
 types:
   request:    !include mod-ill-ramls/schemas/request.json
   requests:   !include mod-ill-ramls/schemas/requests.json
-  status:     !include mod-ill-ramls/schemas/status.json
-  statuses:   !include mod-ill-ramls/schemas/statuses.json
+  illStatus:     !include mod-ill-ramls/schemas/ill-status.json
+  illStatuses:   !include mod-ill-ramls/schemas/ill-statuses.json
   errors:     !include raml-util/schemas/errors.schema
   parameters: !include raml-util/schemas/parameters.schema
 
@@ -64,14 +64,14 @@ resourceTypes:
         responses:
           501:
             description: "Not implemented yet"
-  /statuses:
-    displayName: Statuses
+  /ill-statuses:
+    displayName: ILL Statuses
     type:
       collection:
-        exampleCollection: !include mod-ill-ramls/examples/statuses.json
-        exampleItem: !include mod-ill-ramls/examples/status.json
-        schemaCollection: statuses
-        schemaItem: status
+        exampleCollection: !include mod-ill-ramls/examples/ill-statuses.json
+        exampleItem: !include mod-ill-ramls/examples/ill-status.json
+        schemaCollection: illStatuses
+        schemaItem: illStatus
     get:
       is: [pageable,
         searchable: {description: "searchable using CQL",
@@ -82,8 +82,8 @@ resourceTypes:
     /{statusId}:
       type:
         collection-item:
-          exampleItem: !include mod-ill-ramls/examples/status.json
-          schema: status
+          exampleItem: !include mod-ill-ramls/examples/ill-status.json
+          schema: illStatus
       get:
       put:
         is: [validate]

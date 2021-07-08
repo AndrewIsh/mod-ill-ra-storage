@@ -4,10 +4,10 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Context;
 import io.vertx.core.Handler;
 import org.folio.rest.annotations.Validate;
+import org.folio.rest.jaxrs.model.IllStatus;
+import org.folio.rest.jaxrs.model.IllStatuses;
 import org.folio.rest.jaxrs.model.Request;
 import org.folio.rest.jaxrs.model.Requests;
-import org.folio.rest.jaxrs.model.Status;
-import org.folio.rest.jaxrs.model.Statuses;
 import org.folio.rest.jaxrs.resource.IllRaStorage;
 import org.folio.rest.persist.PgUtil;
 
@@ -127,75 +127,71 @@ public class IllRequestsAPI implements IllRaStorage {
 
   @Validate
   @Override
-  public void getIllRaStorageStatuses(int offset, int limit, String query, String lang, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
+  public void getIllRaStorageIllStatuses(int offset, int limit, String query, String lang, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
     PgUtil.get(
       ILL_STATUS_TABLE,
-      Status.class,
-      Statuses.class,
+      IllStatus.class,
+      IllStatuses.class,
       query,
       offset,
       limit,
       okapiHeaders,
       vertxContext,
-      GetIllRaStorageStatusesResponse.class,
+      GetIllRaStorageIllStatusesResponse.class,
       asyncResultHandler
     );
   }
 
   @Validate
   @Override
-  public void postIllRaStorageStatuses(String lang, Status status, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
+  public void postIllRaStorageIllStatuses(String lang, IllStatus status, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
     PgUtil.post(
       ILL_STATUS_TABLE,
       status,
       okapiHeaders,
       vertxContext,
-      PostIllRaStorageStatusesResponse.class,
+      PostIllRaStorageIllStatusesResponse.class,
       asyncResultHandler
     );
   }
 
   @Validate
   @Override
-  public void getIllRaStorageStatusesByStatusId(String id, String lang, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
-    // TODO: Fix error detailed here:
-    // https://folio-project.slack.com/archives/CC0PHKEMT/p1625581263193100
+  public void getIllRaStorageIllStatusesByStatusId(String id, String lang, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
     PgUtil.getById(
       ILL_STATUS_TABLE,
-      Status.class,
+      IllStatus.class,
       id,
       okapiHeaders,
       vertxContext,
-      GetIllRaStorageStatusesByStatusIdResponse.class,
+      GetIllRaStorageIllStatusesByStatusIdResponse.class,
       asyncResultHandler
     );
   }
 
   @Validate
   @Override
-  public void putIllRaStorageStatusesByStatusId(String id, String lang, Status status, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
-    // TODO: Fix error detailed here:
-    // https://folio-project.slack.com/archives/CC0PHKEMT/p1625581263193100
+  public void putIllRaStorageIllStatusesByStatusId(String id, String lang, IllStatus status, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
     PgUtil.put(
       ILL_STATUS_TABLE,
       status,
       id,
       okapiHeaders,
       vertxContext,
-      PutIllRaStorageStatusesByStatusIdResponse.class,
+      PutIllRaStorageIllStatusesByStatusIdResponse.class,
       asyncResultHandler
     );
   }
 
   @Validate
   @Override
-  public void deleteIllRaStorageStatusesByStatusId(String id, String lang, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
+  public void deleteIllRaStorageIllStatusesByStatusId(String id, String lang, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
     PgUtil.deleteById(
       ILL_STATUS_TABLE,
       id,
       okapiHeaders,
       vertxContext,
-      DeleteIllRaStorageStatusesByStatusIdResponse.class,
+      DeleteIllRaStorageIllStatusesByStatusIdResponse.class,
       asyncResultHandler
     );
   }
