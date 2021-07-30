@@ -1,66 +1,12 @@
 {
   "tables": [
     {
-      "tableName": "ill_request",
+      "tableName": "submission_status",
       "fromModuleVersion": "0.1",
       "withMetadata": true,
       "withAuditing": true,
-      "auditingTableName": "audit_ill_request",
-      "auditingFieldName": "ill_request",
-      "uniqueIndex": [
-        {
-          "fieldName": "requestId",
-          "tOps": "ADD",
-          "caseSensitive": true,
-          "removeAccents": false
-        }
-      ],
-      "index": [
-        {
-          "fieldName": "id",
-          "tOps": "DELETE",
-          "caseSensitive": true,
-          "removeAccents": false
-        },
-        {
-          "fieldName": "supplierId",
-          "tOps": "ADD",
-          "caseSensitive": true,
-          "removeAccents": false
-        },
-        {
-          "fieldName": "userId",
-          "tOps": "ADD",
-          "caseSensitive": true,
-          "removeAccents": false
-        },
-        {
-          "fieldName": "itemId",
-          "tOps": "ADD",
-          "caseSensitive": true,
-          "removeAccents": false
-        },
-        {
-          "fieldName": "requestLocation",
-          "tOps": "ADD",
-          "caseSensitive": true,
-          "removeAccents": false
-        },
-        {
-          "fieldName": "statusId",
-          "tOps": "ADD",
-          "caseSensitive": true,
-          "removeAccents": false
-        }
-      ]
-    },
-    {
-      "tableName": "ill_status",
-      "fromModuleVersion": "0.1",
-      "withMetadata": true,
-      "withAuditing": true,
-      "auditingTableName": "audit_ill_status",
-      "auditingFieldName": "ill_status",
+      "auditingTableName": "audit_submission_status",
+      "auditingFieldName": "submission_status",
       "uniqueIndex": [
         {
           "fieldName": "statusId",
@@ -81,6 +27,86 @@
           "tOps": "ADD",
           "caseSensitive": true,
           "removeAccents": false
+        }
+      ]
+    },
+    {
+      "tableName": "ill_submission",
+      "fromModuleVersion": "0.1",
+      "withMetadata": true,
+      "withAuditing": true,
+      "auditingTableName": "audit_ill_submission",
+      "auditingFieldName": "ill_submission",
+      "uniqueIndex": [
+        {
+          "fieldName": "submissionId",
+          "tOps": "ADD",
+          "caseSensitive": true,
+          "removeAccents": false
+        }
+      ],
+      "index": [
+        {
+          "fieldName": "id",
+          "tOps": "DELETE",
+          "caseSensitive": true,
+          "removeAccents": false
+        },
+        {
+          "fieldName": "userId",
+          "tOps": "ADD",
+          "caseSensitive": true,
+          "removeAccents": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "fieldName": "statusId",
+          "targetTable": "submission_status",
+          "tOps": "ADD"
+        }
+      ]
+    },
+    {
+      "tableName": "ill_request",
+      "fromModuleVersion": "0.1",
+      "withMetadata": true,
+      "withAuditing": true,
+      "auditingTableName": "audit_ill_request",
+      "auditingFieldName": "ill_request",
+      "uniqueIndex": [
+        {
+          "fieldName": "id",
+          "tOps": "ADD",
+          "caseSensitive": true,
+          "removeAccents": false
+        }
+      ],
+      "index": [
+        {
+          "fieldName": "id",
+          "tOps": "DELETE",
+          "caseSensitive": true,
+          "removeAccents": false
+        },
+        {
+          "fieldName": "submissionId",
+          "tOps": "ADD",
+          "caseSensitive": true,
+          "removeAccents": false
+        },
+        {
+          "fieldName": "supplierId",
+          "tOps": "ADD",
+          "caseSensitive": true,
+          "removeAccents": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "fieldName": "submissionId",
+          "targetTable": "ill_submission",
+          "tOps": "ADD"
         }
       ]
     }
