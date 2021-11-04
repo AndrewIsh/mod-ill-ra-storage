@@ -90,12 +90,6 @@
           "removeAccents": false
         },
         {
-          "fieldName": "submissionId",
-          "tOps": "ADD",
-          "caseSensitive": true,
-          "removeAccents": false
-        },
-        {
           "fieldName": "supplierId",
           "tOps": "ADD",
           "caseSensitive": true,
@@ -106,6 +100,43 @@
         {
           "fieldName": "submissionId",
           "targetTable": "ill_submission",
+          "tOps": "ADD"
+        }
+      ]
+    },
+    {
+      "tableName": "ill_supplier_message",
+      "fromModuleVersion": "0.1",
+      "withMetadata": true,
+      "withAuditing": true,
+      "auditingTableName": "audit_ill_supplier_message",
+      "auditingFieldName": "ill_supplier_message",
+      "uniqueIndex": [
+        {
+          "fieldName": "id",
+          "tOps": "ADD",
+          "caseSensitive": true,
+          "removeAccents": false
+        }
+      ],
+      "index": [
+        {
+          "fieldName": "id",
+          "tOps": "DELETE",
+          "caseSensitive": true,
+          "removeAccents": false
+        },
+        {
+          "fieldName": "message",
+          "tOps": "ADD",
+          "caseSensitive": true,
+          "removeAccents": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "fieldName": "requestId",
+          "targetTable": "ill_request",
           "tOps": "ADD"
         }
       ]

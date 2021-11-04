@@ -16,6 +16,7 @@ public class IllRequestsAPI implements IllRaStorage {
   private static final String ILL_SUBMISSION_TABLE = "ill_submission";
   private static final String SUBMISSION_STATUS_TABLE = "submission_status";
   private static final String ILL_REQUEST_TABLE = "ill_request";
+  private static final String ILL_SUPPLIER_MESSAGE_TABLE = "ill_supplier_message";
 
   @Override
   public void getIllRaStorageSubmissions(int offset, int limit, String query, String lang, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
@@ -50,6 +51,17 @@ public class IllRequestsAPI implements IllRaStorage {
     } catch(Exception e) {
       asyncResultHandler.handle(Future.succeededFuture(GetIllRaStorageSubmissionsRequestsBySubmissionIdResponse.respond500WithTextPlain(e.getMessage())));
     }
+  }
+
+  @Override
+  public void getIllRaStorageMessages(int offset, int limit, String query, String lang, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
+    PgUtil.get(ILL_SUPPLIER_MESSAGE_TABLE, Message.class, Messages.class, query, offset, limit, okapiHeaders, vertxContext, GetIllRaStorageMessagesResponse.class, asyncResultHandler);
+  }
+
+  @Override
+  public void postIllRaStorageMessages(String lang, Message entity, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
+    // Receive a Supplying Agency Message a store it
+    PgUtil.post(ILL_SUPPLIER_MESSAGE_TABLE, entity, okapiHeaders, vertxContext, PostIllRaStorageMessagesResponse.class, asyncResultHandler);
   }
 
   @Override
