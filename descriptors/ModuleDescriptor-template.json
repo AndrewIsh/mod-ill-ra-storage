@@ -1,6 +1,6 @@
 {
   "id": "${artifactId}-${version}",
-  "name": "Interlibrary Request Storage",
+  "name": "Interlibrary Loan Storage",
   "requires": [
     {
       "id": "users",
@@ -58,6 +58,11 @@
         },
         {
           "methods": ["GET"],
+          "pathPattern": "/ill-ra-storage/submissions/{id}/requests",
+          "permissionsRequired": ["ill-ra-storage.requests.collection.get"]
+        },
+        {
+          "methods": ["GET"],
           "pathPattern": "/ill-ra-storage/requests",
           "permissionsRequired": ["ill-ra-storage.requests.collection.get"]
         },
@@ -105,6 +110,16 @@
           "methods": ["DELETE"],
           "pathPattern": "/ill-ra-storage/submission-statuses/{id}",
           "permissionsRequired": ["ill-ra-storage.submission-statuses.item.delete"]
+        },
+        {
+          "methods": ["GET"],
+          "pathPattern": "/ill-ra-storage/messages",
+          "permissionsRequired": ["ill-ra-storage.messages.collection.get"]
+        },
+        {
+          "methods": ["POST"],
+          "pathPattern": "/ill-ra-storage/messages",
+          "permissionsRequired": ["ill-ra-storage.messages.item.post"]
         }
       ]
     }
@@ -184,6 +199,16 @@
       "permissionName": "ill-ra-storage.submission-statuses.item.delete",
       "displayName": "Interlibrary loan submission statuses - delete status",
       "description": "Delete status"
+    },
+    {
+      "permissionName": "ill-ra-storage.messages.collection.get",
+      "displayName": "Interlibrary loan supplying agency messages - get messages collection",
+      "description": "Get messages collection"
+    },
+    {
+      "permissionName": "ill-ra-storage.messages.item.post",
+      "displayName": "Interlibrary loan supplying agency messages - create message",
+      "description": "Create message"
     }
   ],
   "launchDescriptor": {
