@@ -2,7 +2,7 @@
   "tables": [
     {
       "tableName": "submission_status",
-      "fromModuleVersion": "0.1",
+      "fromModuleVersion": "1.0",
       "withMetadata": true,
       "withAuditing": true,
       "auditingTableName": "audit_submission_status",
@@ -32,7 +32,7 @@
     },
     {
       "tableName": "ill_submission",
-      "fromModuleVersion": "0.1",
+      "fromModuleVersion": "1.0",
       "withMetadata": true,
       "withAuditing": true,
       "auditingTableName": "audit_ill_submission",
@@ -69,7 +69,7 @@
     },
     {
       "tableName": "ill_request",
-      "fromModuleVersion": "0.1",
+      "fromModuleVersion": "1.0",
       "withMetadata": true,
       "withAuditing": true,
       "auditingTableName": "audit_ill_request",
@@ -106,7 +106,7 @@
     },
     {
       "tableName": "ill_supplier_message",
-      "fromModuleVersion": "0.1",
+      "fromModuleVersion": "1.0",
       "withMetadata": true,
       "withAuditing": true,
       "auditingTableName": "audit_ill_supplier_message",
