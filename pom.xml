@@ -413,7 +413,6 @@
           <outputDirectory>${project.build.directory}/generated-sources/raml-jaxrs</outputDirectory>
           <targetPackage>org.folio.rest.jaxrs.model</targetPackage>
           <generateBuilders>true</generateBuilders>
-          <dateTimeType>java.time.ZonedDateTime</dateTimeType>
         </configuration>
         <executions>
           <execution>
