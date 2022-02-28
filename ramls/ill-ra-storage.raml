@@ -13,8 +13,8 @@ types:
   submissions:   !include mod-ill-ramls/schemas/submission/submissions.json
   submissionStatus:     !include mod-ill-ramls/schemas/submission-status/submission-status.json
   submissionStatuses:   !include mod-ill-ramls/schemas/submission-status/submission-statuses.json
-  message: !include mod-ill-ramls/schemas/supplying-agency-message-storage/request/supplying-agency-message-storage-request.schema
-  messages: !include mod-ill-ramls/schemas/supplying-agency-message-storage/request/supplying-agency-message-storage-requests.schema
+  saMessage: !include mod-ill-ramls/schemas/supplying-agency-message-storage/request/supplying-agency-message-storage-request.schema
+  saMessages: !include mod-ill-ramls/schemas/supplying-agency-message-storage/request/supplying-agency-message-storage-requests.schema
   messageResponse: !include mod-ill-ramls/schemas/supplying-agency-message-storage/response/supplying-agency-message-storage-response.schema
   request:    !include mod-ill-ramls/schemas/request/request.json
   requests:   !include mod-ill-ramls/schemas/request/requests.json
@@ -138,6 +138,18 @@ resourceTypes:
         responses:
           501:
             description: "Not implemented yet"
+      /messages:
+        displayName: A collection of supplier messages associated with a supplier request
+        type:
+          collection:
+            exampleCollection: !include mod-ill-ramls/examples/message/message.json
+            exampleItem: !include mod-ill-ramls/examples/message/message.json
+            schemaCollection: saMessages
+            schemaItem: saMessage
+        get:
+          responses:
+            501:
+              description: "Not implemented yet"
   /messages:
     displayName: Messages
     description: Supplying Agency Messages
@@ -145,8 +157,8 @@ resourceTypes:
       collection:
         exampleCollection: !include mod-ill-ramls/examples/message/messages.json
         exampleItem: !include mod-ill-ramls/examples/message/message.json
-        schemaCollection: messages
-        schemaItem: message
+        schemaCollection: saMessages
+        schemaItem: saMessage
     get:
       is: [pageable,
         searchable: {description: "searchable using CQL",

@@ -19,6 +19,16 @@ public class IllRequestsAPI implements IllRaStorage {
   private static final String ILL_SUPPLIER_MESSAGE_TABLE = "ill_supplier_message";
 
   @Override
+  public void getIllRaStorageRequestsMessagesByRequestId(String requestId, String lang, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
+    PgUtil.getById(ILL_SUPPLIER_MESSAGE_TABLE, SaMessages.class, requestId, okapiHeaders, vertxContext, GetIllRaStorageRequestsMessagesByRequestIdResponse.class, asyncResultHandler);
+  }
+
+  @Override
+  public void postIllRaStorageRequestsMessagesByRequestId(String requestId, String lang, SaMessage entity, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
+
+  }
+
+  @Override
   public void getIllRaStorageSubmissions(int offset, int limit, String query, String lang, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
     PgUtil.get(ILL_SUBMISSION_TABLE, Submission.class, Submissions.class, query, offset, limit, okapiHeaders, vertxContext, GetIllRaStorageSubmissionsResponse.class, asyncResultHandler);
   }
@@ -55,11 +65,11 @@ public class IllRequestsAPI implements IllRaStorage {
 
   @Override
   public void getIllRaStorageMessages(int offset, int limit, String query, String lang, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
-    PgUtil.get(ILL_SUPPLIER_MESSAGE_TABLE, Message.class, Messages.class, query, offset, limit, okapiHeaders, vertxContext, GetIllRaStorageMessagesResponse.class, asyncResultHandler);
+    PgUtil.get(ILL_SUPPLIER_MESSAGE_TABLE, SaMessage.class, SaMessages.class, query, offset, limit, okapiHeaders, vertxContext, GetIllRaStorageMessagesResponse.class, asyncResultHandler);
   }
 
   @Override
-  public void postIllRaStorageMessages(String lang, Message entity, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
+  public void postIllRaStorageMessages(String lang, SaMessage entity, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
     // Receive a Supplying Agency Message a store it
     PgUtil.post(ILL_SUPPLIER_MESSAGE_TABLE, entity, okapiHeaders, vertxContext, PostIllRaStorageMessagesResponse.class, asyncResultHandler);
   }

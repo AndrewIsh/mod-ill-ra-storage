@@ -113,6 +113,11 @@
         },
         {
           "methods": ["GET"],
+          "pathPattern": "/ill-ra-storage/requests/{id}/messages",
+          "permissionsRequired": ["ill-ra-storage.messages.collection.get"]
+        },
+        {
+          "methods": ["GET"],
           "pathPattern": "/ill-ra-storage/messages",
           "permissionsRequired": ["ill-ra-storage.messages.collection.get"]
         },
