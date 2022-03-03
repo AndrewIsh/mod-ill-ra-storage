@@ -147,6 +147,10 @@ resourceTypes:
             schemaCollection: saMessages
             schemaItem: saMessage
         get:
+          is: [pageable,
+            searchable: {description: "searchable using CQL",
+                            example: "id=\"cf23adf0-61ba-4887-bf82-956c4aae2260\""},
+            ]
           responses:
             501:
               description: "Not implemented yet"
@@ -159,13 +163,5 @@ resourceTypes:
         exampleItem: !include mod-ill-ramls/examples/message/message.json
         schemaCollection: saMessages
         schemaItem: saMessage
-    get:
-      is: [pageable,
-        searchable: {description: "searchable using CQL",
-                        example: "id=\"cf23adf0-61ba-4887-bf82-956c4aae2260\""},
-        ]
-      responses:
-        501:
-          description: "Not implemented yet"
     post:
       is: [validate]

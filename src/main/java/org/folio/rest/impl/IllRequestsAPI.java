@@ -19,13 +19,13 @@ public class IllRequestsAPI implements IllRaStorage {
   private static final String ILL_SUPPLIER_MESSAGE_TABLE = "ill_supplier_message";
 
   @Override
-  public void getIllRaStorageRequestsMessagesByRequestId(String requestId, String lang, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
-    PgUtil.getById(ILL_SUPPLIER_MESSAGE_TABLE, SaMessages.class, requestId, okapiHeaders, vertxContext, GetIllRaStorageRequestsMessagesByRequestIdResponse.class, asyncResultHandler);
+  public void getIllRaStorageRequestsMessagesByRequestId(String requestId, int offset, int limit, String query, String lang, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
+    String messageQuery = String.format("requestId == %s", StringUtil.cqlEncode(requestId));
+    PgUtil.get(ILL_SUPPLIER_MESSAGE_TABLE, SaMessage.class, SaMessages.class, messageQuery, offset, limit, okapiHeaders, vertxContext, GetIllRaStorageMessagesResponse.class, asyncResultHandler);
   }
 
   @Override
   public void postIllRaStorageRequestsMessagesByRequestId(String requestId, String lang, SaMessage entity, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
-
   }
 
   @Override
@@ -64,19 +64,17 @@ public class IllRequestsAPI implements IllRaStorage {
   }
 
   @Override
-  public void getIllRaStorageMessages(int offset, int limit, String query, String lang, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
-    PgUtil.get(ILL_SUPPLIER_MESSAGE_TABLE, SaMessage.class, SaMessages.class, query, offset, limit, okapiHeaders, vertxContext, GetIllRaStorageMessagesResponse.class, asyncResultHandler);
-  }
-
-  @Override
   public void postIllRaStorageMessages(String lang, SaMessage entity, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
     // Receive a Supplying Agency Message a store it
     PgUtil.post(ILL_SUPPLIER_MESSAGE_TABLE, entity, okapiHeaders, vertxContext, PostIllRaStorageMessagesResponse.class, asyncResultHandler);
   }
 
   @Override
-  public void postIllRaStorageSubmissionsRequestsBySubmissionId(String submissionId, String lang, Request entity, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
+  public void getIllRaStorageMessages(String lang, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
+  }
 
+  @Override
+  public void postIllRaStorageSubmissionsRequestsBySubmissionId(String submissionId, String lang, Request entity, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
   }
 
   @Override

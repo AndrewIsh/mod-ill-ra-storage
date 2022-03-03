@@ -117,11 +117,6 @@
           "permissionsRequired": ["ill-ra-storage.messages.collection.get"]
         },
         {
-          "methods": ["GET"],
-          "pathPattern": "/ill-ra-storage/messages",
-          "permissionsRequired": ["ill-ra-storage.messages.collection.get"]
-        },
-        {
           "methods": ["POST"],
           "pathPattern": "/ill-ra-storage/messages",
           "permissionsRequired": ["ill-ra-storage.messages.item.post"]
