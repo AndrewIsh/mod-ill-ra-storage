@@ -4,12 +4,18 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Context;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
+import io.vertx.core.json.JsonObject;
+import io.vertx.sqlclient.Row;
 import org.folio.rest.jaxrs.model.*;
 import org.folio.rest.jaxrs.resource.IllRaStorage;
 import org.folio.rest.persist.PgUtil;
+import org.folio.rest.persist.PostgresClient;
+import org.folio.rest.tools.utils.TenantTool;
 import org.folio.util.StringUtil;
 
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class IllRequestsAPI implements IllRaStorage {
@@ -79,7 +85,40 @@ public class IllRequestsAPI implements IllRaStorage {
 
   @Override
   public void getIllRaStorageSubmissionStatuses(int offset, int limit, String query, String lang, Map<String, String> okapiHeaders, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) {
-    PgUtil.get(SUBMISSION_STATUS_TABLE, SubmissionStatus.class, SubmissionStatuses.class, query, offset, limit, okapiHeaders, vertxContext, GetIllRaStorageSubmissionStatusesResponse.class, asyncResultHandler);
+    // I'm *sure* there must be a better way of doing this
+    // We're fetching the submission statuses and populating their submissionCount
+    vertxContext.runOnContext(v -> {
+      try {
+        String tenantId = TenantTool.tenantId(okapiHeaders);
+        PostgresClient instance = PostgresClient.getInstance(vertxContext.owner(), tenantId);
+        String sql = String.format(
+          "SELECT %1$s.*, ( SELECT COUNT(*) FROM %2$s WHERE %2$s.statusId = %1$s.id ) AS cnt FROM %1$s;",
+          SUBMISSION_STATUS_TABLE,
+          ILL_SUBMISSION_TABLE
+        );
+        instance.select(sql,
+          reply -> {
+            List<SubmissionStatus> toReturn = new ArrayList<>();
+            if (reply.succeeded()) {
+              for (Row row : reply.result()) {
+                JsonObject jsonb = (JsonObject) row.getJson("jsonb");
+                SubmissionStatus submissionStatus = jsonb.mapTo(SubmissionStatus.class);
+                Integer cnt = row.getInteger("cnt");
+                submissionStatus.setSubmissionCount(cnt);
+                toReturn.add(submissionStatus);
+              }
+              SubmissionStatuses ss = new SubmissionStatuses();
+              ss.setStatuses(toReturn);
+              asyncResultHandler.handle(Future.succeededFuture(GetIllRaStorageSubmissionStatusesResponse.respond200WithApplicationJson(ss)));
+            } else {
+              asyncResultHandler.handle(Future.succeededFuture(GetIllRaStorageSubmissionStatusesResponse.respond400WithTextPlain(reply.cause())));
+            }
+          }
+        );
+      } catch (Exception e) {
+        asyncResultHandler.handle(Future.succeededFuture(GetIllRaStorageSubmissionStatusesResponse.respond500WithTextPlain(e.getMessage())));
+      }
+    });
   }
 
   @Override
