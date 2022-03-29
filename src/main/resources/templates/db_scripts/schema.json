@@ -37,6 +37,7 @@
       "withAuditing": true,
       "auditingTableName": "audit_ill_submission",
       "auditingFieldName": "ill_submission",
+      "customSnippetPath": "ill_submission.sql",
       "uniqueIndex": [
         {
           "fieldName": "submissionId",
@@ -111,6 +112,7 @@
       "withAuditing": true,
       "auditingTableName": "audit_ill_supplier_message",
       "auditingFieldName": "ill_supplier_message",
+      "customSnippetPath": "ill_supplier_message.sql",
       "uniqueIndex": [
         {
           "fieldName": "id",
